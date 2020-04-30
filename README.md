@@ -47,7 +47,11 @@ Ces objets pouvant s’intégrer dans des plateformes de relever per-mettent d�
 
 - Diagramme de cas d'utilisation du système
 
+![alt text](Diagramme/diagramme_acquisition_des_donnee.png "Logo Title Text 1")
+
+
 - Diagramme de séquence : protocoleMQTT
+
 
 - Diagramme de séquence : Acquisition des données
 
