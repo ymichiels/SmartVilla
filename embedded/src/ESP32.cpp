@@ -27,13 +27,12 @@
 #include <WiFi.h>
 #include "config_wifi.h"        // Wifi configuration
 
-
 //Constants
 #define TOPIC_PREFIX "smart-villa/etage1/esp32/"
 
-#define DHT_SENSOR
-#define DISTANCE_SENSOR
-#define LIGHT_SENSOR
+//#define DHT_SENSOR
+//#define DISTANCE_SENSOR
+//#define LIGHT_SENSOR
 #define MOTION_SENSOR
 
 #ifdef DHT_SENSOR
@@ -61,9 +60,9 @@
 
 #ifdef MOTION_SENSOR
     #define TOPIC_MOTION "mouv"
-    #define PIR_PIN 27          // choose the input pin (for PIR sensor)
+    #define PIR_PIN 5           // choose the input pin (for PIR sensor)
     int pirState = LOW;         // we start, assuming no motion detected
-    int val = 0;                // variable for reading the pin status
+    int detect;                 // variable for reading the pin status
 #endif
 
 WiFiClient espClient;
@@ -146,7 +145,7 @@ void setup() { // to run once
         pinMode(LIGHT_LED_PIN, OUTPUT);     // declare led pin as OUTPUT
     #endif
     #ifdef MOTION_SENSOR
-        pinMode(PIR_PIN, INPUT_PULLUP);     // declare sensor as INPUT_PULLUP
+        pinMode(PIR_PIN, INPUT);     // declare sensor as INPUT
         // Set motionSensor pin as interrupt, assign interrupt function and set RISING mode
     #endif
 
@@ -230,8 +229,8 @@ void loop() {
 
     #ifdef MOTION_SENSOR
     {
-        val = digitalRead(PIR_PIN);     // read input value
-        if (val == HIGH) {              // check if the input is HIGH
+        detect = digitalRead(PIR_PIN);     // read input value
+        if (detect == HIGH) {              // check if the input is HIGH
             if (pirState == LOW) {
                 // we have just turned on
                 Serial.println("Motion detected!");
@@ -246,11 +245,9 @@ void loop() {
                 pirState = LOW;
             }
         }
-        logValue(TOPIC_MOTION, val);
+        logValue(TOPIC_MOTION, detect);
     }
     #endif
-
-    client.loop();
 
     // Wait a few seconds between measurements. The DHT22 should not be read at a higher frequency of
     // about once every 2 seconds. So we add a 3 second delay to cover this.
