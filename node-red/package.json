@@ -1,0 +1,19 @@
+{
+  "name": "just-a-test",
+  "version": "0.1.0",
+  "description": "Just a test for node-red",
+  "main": "node_modules/node-red/red.js",
+  "scripts": {
+    "start": "node node_modules/node-red/red.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node": "^14.2.0",
+    "node-red": "^1.0.6",
+    "node-red-contrib-ui-contextmenu": "^1.0.13",
+    "node-red-contrib-ui-svg": "^1.2.3",
+    "node-red-dashboard": "^2.22.1",
+    "node-red-node-mongodb": "0.0.14"
+  }
+}

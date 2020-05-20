@@ -1,3 +1,14 @@
+/*This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.*/
+
 //-- end test
 //#include "data.h"
 
@@ -32,7 +43,16 @@
 
 //#define WIFI_USED
 #ifdef WIFI_USED
+// utilise l'ESP8266
+#ifdef ESP8266
 #include <ESP8266WiFi.h>
+#endif
+
+// utilise l'ESP32
+#ifdef ESP32
+#include <WiFi.h>
+#endif
+
 #include <PubSubClient.h>
 WiFiClient client;
 PubSubClient psc{MQTT_IP, MQTT_PORT, client};
@@ -44,12 +64,7 @@ PubSubClient psc{MQTT_IP, MQTT_PORT, client};
 DHT dht(DHT_PIN, DHT11);
 #endif
 
-#ifdef MOTION_SENS
-// boolean indicating wether something was detected last cycle
-bool motionLastState;
-#endif
-
-
+// utilisation de template pour ne pas avoir a caster les valeurs données à cette fonction
 template<class T>
 void logValue(const char category[], const T& value) {
   String raw{value};
@@ -100,7 +115,6 @@ void setup() {
 #endif
 #ifdef MOTION_SENS
   pinMode(PIR_PIN, INPUT);
-  motionLastState = false;
 #endif
 #ifdef DIST_SENS
   pinMode(TRIG_PIN,OUTPUT);
@@ -175,5 +189,5 @@ void loop()
   Serial.print(millis() - start);
   Serial.println("ms");
   Serial.println();
-  delay(1000);
+  delay(3000);
 }

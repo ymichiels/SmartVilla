@@ -1,4 +1,4 @@
 .pio
 .vscode/
 .idea/
-config_wifi.h
+/config_wifi.h
