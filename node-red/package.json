@@ -1,18 +1,29 @@
 {
-  "name": "just-a-test",
-  "version": "0.1.0",
-  "description": "Just a test for node-red",
+  "name": "node-red",
+  "version": "0.1.1",
+  "description": "UI editor node-red for SmartVilla app",
   "main": "node_modules/node-red/red.js",
+  "readme": "README.md",
   "scripts": {
-    "start": "node node_modules/node-red/red.js"
+    "start": "node node_modules/node-red/red.js",
+    "admin": "node-red-admin",
+    "adminauth": "node -e \"console.log(require('bcryptjs').hashSync(process.argv[1], 8));\""
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Michiels Yan & Cebollado Johann",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ymichiels/SmartVilla"
+  },
+  "license": "GPL-3.0-only",
   "dependencies": {
     "node": "^14.2.0",
     "node-red": "^1.0.6",
+    "node-red-admin": "^0.1.8",
+    "node-red-contrib-auth": "^0.1.7",
     "node-red-contrib-ui-contextmenu": "^1.0.13",
     "node-red-contrib-ui-svg": "^1.2.3",
+    "node-red-contrib-ui_list": "^0.1.5",
+    "node-red-contrib-web-worldmap": "^2.3.11",
     "node-red-dashboard": "^2.22.1",
     "node-red-node-mongodb": "0.0.14"
   }
