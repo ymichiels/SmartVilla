@@ -18,7 +18,7 @@
  *           PIR sensor tester
  * Description: print humidity temperature to serial
  *              print distance to serial
- *              print motion movement
+ *              print motion movement boolean
  *              print light boolean
  ********************/
 

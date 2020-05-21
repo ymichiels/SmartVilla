@@ -12,10 +12,17 @@
   "author": "Michiels Yan & Cebollado Johann",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ymichiels/SmartVilla"
+    "url": "git://github.com/ymichiels/SmartVilla.git"
   },
+  "keywords": [
+    "node-red",
+    "nodes",
+    "flow",
+    "SmartVilla"
+  ],
   "license": "GPL-3.0-only",
   "dependencies": {
+    "mongodb": "^3.5.7",
     "node": "^14.2.0",
     "node-red": "^1.0.6",
     "node-red-admin": "^0.1.8",
