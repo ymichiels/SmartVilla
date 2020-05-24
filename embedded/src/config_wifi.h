@@ -18,7 +18,7 @@
 #define WIFI_PWD ""
 
 // ip du brocker MQTT
-#define MQTT_IP IPAddress(20, 188, 44, 39)
+#define MQTT_IP IPAddress(0, 0, 0, 0)
 // port du brocker MQTT
 #define MQTT_PORT 1880
 
