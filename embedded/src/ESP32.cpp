@@ -80,8 +80,6 @@ void logValue(const char category[], float value) {
     client.publish(topic.c_str(), raw.c_str());
 }
 
-volatile float topicTemp;       // using volatile with variable - It tells the compiler that the value of the variable may change at any time--without any action being taken by the code the compiler finds nearby.
-
 void setup_wifi() {
     delay(10);
     // We start by connecting to a WPA/WPA2 network
