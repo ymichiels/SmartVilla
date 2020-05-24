@@ -18,13 +18,16 @@
 #define WIFI_PWD ""
 
 // ip du brocker MQTT
-#define MQTT_IP IPAddress(127, 0, 0, 1)
+#define MQTT_IP IPAddress(20, 188, 44, 39)
 // port du brocker MQTT
-#define MQTT_PORT 1883
+#define MQTT_PORT 1880
 
 // nom d'utilisateur MQTT
 #define MQTT_NAME ""
 // mot de passe de l'utilisateur mqtt
 #define MQTT_PWD ""
+
+// clé API google pour géocalisation
+#define API_KEY "AIzaSyA1xl75rhbHZKvADw28rSl8MuNc6snGOBU"
 
 #endif // CONFIG_WIFI_HEADER

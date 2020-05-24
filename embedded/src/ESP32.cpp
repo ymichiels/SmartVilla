@@ -18,13 +18,14 @@
  *           PIR sensor tester
  * Description: print humidity temperature to serial
  *              print distance to serial
- *              print motion movement boolean
+ *              print motion movement
  *              print light boolean
  ********************/
 
 #include <DHT.h>
 #include <PubSubClient.h>
 #include <WiFi.h>
+#include <WifiLocation.h>
 #include "config_wifi.h"        // Wifi configuration
 
 //Constants
@@ -70,6 +71,7 @@ PubSubClient client{MQTT_IP, MQTT_PORT, espClient};
 long lastMsg = 0;
 char msg[50];
 int value = 0;
+WifiLocation location(API_KEY);
 
 void logValue(const char category[], float value) {
     String raw{value};
@@ -82,22 +84,33 @@ volatile float topicTemp;       // using volatile with variable - It tells the c
 
 void setup_wifi() {
     delay(10);
-    // We start by connecting to a WiFi network
+    // We start by connecting to a WPA/WPA2 network
     Serial.println();
     Serial.print("Connecting to ");
     Serial.println(WIFI_SSID);
 
+    WiFi.mode(WIFI_MODE_STA);
+
     WiFi.begin(WIFI_SSID, WIFI_PWD);
 
     while (WiFi.status() != WL_CONNECTED) {
+        Serial.print("Attempting to connect to WPA SSID: ");
+        Serial.println(WIFI_SSID);
+        // wait 5 seconds for connection:
+        Serial.print("Status = ");
+        Serial.println(WiFi.status());
         delay(500);
-        Serial.print(".");
     }
+    location_t loc = location.getGeoFromWiFi();
 
     Serial.println("");
     Serial.println("WiFi connected");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
+    Serial.println("IP address: " + String(WiFi.localIP()));
+    Serial.println("Location request data");
+    Serial.println(location.getSurroundingWiFiJson());
+    Serial.println("Latitude: " + String(loc.lat, 7));
+    Serial.println("Longitude: " + String(loc.lon, 7));
+    Serial.println("Accuracy: " + String(loc.accuracy));
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -248,6 +261,8 @@ void loop() {
         logValue(TOPIC_MOTION, detect);
     }
     #endif
+
+    //client.loop();
 
     // Wait a few seconds between measurements. The DHT22 should not be read at a higher frequency of
     // about once every 2 seconds. So we add a 3 second delay to cover this.
