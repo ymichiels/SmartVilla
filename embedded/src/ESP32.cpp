@@ -66,6 +66,9 @@
     int detect;                 // variable for reading the pin status
 #endif
 
+#define TOPIC_LATITUDE "lat"
+#define TOPIC_LONGITUDE "lon"
+
 WiFiClient espClient;
 PubSubClient client{MQTT_IP, MQTT_PORT, espClient};
 long lastMsg = 0;
@@ -107,7 +110,9 @@ void setup_wifi() {
     Serial.println("Location request data");
     Serial.println(location.getSurroundingWiFiJson());
     Serial.println("Latitude: " + String(loc.lat, 7));
+    logValue(TOPIC_LATITUDE, loc.lat);
     Serial.println("Longitude: " + String(loc.lon, 7));
+    logValue(TOPIC_LONGITUDE, loc.lon);
     Serial.println("Accuracy: " + String(loc.accuracy));
 }
 
