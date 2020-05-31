@@ -23,16 +23,8 @@
  ********************/
 
 //#include <stdio.h>
-//#include "config_wifi.h"        // Wifi configuration
 
 //Constants
-
-//Topic
-#define TOPIC_PREFIX "smart-villa/etage1/"
-
-//#define WIFI_USED
-//#define GEOLOCATION_USED
-//#define SEND_INVALID 1
 
 //Sensor
 #define DHT_SENSOR
