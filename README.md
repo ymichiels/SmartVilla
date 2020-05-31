@@ -75,7 +75,7 @@ Télécharger et installer sur votre machine la dernière version stable de l'ID
 
 3. Installation de l'outil Git
 
-Télécharger et installer sur votre machine la dernière version stable de l'outil Git depuis 
+Télécharger et installer sur votre machine la dernière version stable de l'outil Git depuis **[le site officiel git](https://git-scm.com/downloads)**
 
 4. Installation de l'interpréteur Python
 
