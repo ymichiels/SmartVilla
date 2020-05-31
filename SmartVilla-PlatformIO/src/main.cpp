@@ -13,16 +13,16 @@
 
  /********************
  * Program:  DHT22 humidity-temperature sensor tester,
+ *           DHT11 humidity-temperature sensor tester,
  *           HC-SR04 sensor tester
- *           Light sensor Tester
+ *           LDR sensor Tester
  *           PIR sensor tester
- * Description: print humidity temperature to serial
+ * Description: print humidity and temperature to serial
  *              print distance to serial
  *              print motion movement
  *              print light boolean
+ *              destinate to ESP8266 and ESP32 MCU
  ********************/
-
-//#include <stdio.h>
 
 //Constants
 
