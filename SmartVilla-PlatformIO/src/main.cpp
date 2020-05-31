@@ -152,7 +152,7 @@ void logValue(const char category[], float value) {
         // Loop until we're reconnected
         while (!client.connected()) {
             Serial.print("Attempting MQTT connection...");
-                if (client.connect(ESP_TYPE "Client")) {
+            if (client.connect(ESP_TYPE "Client")) {
                 Serial.println("connected");
             }
             else {
@@ -239,28 +239,32 @@ void loop() {
     }
     #endif
 
-    #ifdef LIGHT_PIN
+    #ifdef LIGHT_SENSOR_PIN
     {
         photocellReading = analogRead(LIGHT_SENSOR_PIN); // read the current light levels
         Serial.print("Analog reading = ");
         Serial.print(photocellReading);         // the raw analog reading
         // We'll have a few threshholds, qualitatively determined
+        uint8_t pinState;
         if (photocellReading < 10) {
             Serial.println(" - Black");
-            digitalWrite (LIGHT_LED_PIN, HIGH);   // turn on light
+            pinState =  HIGH;   // turn on light
         } else if (photocellReading < 200) {
             Serial.println(" - Dark");
-            digitalWrite (LIGHT_LED_PIN, LOW);    // turn on light
+            pinState = HIGH;    // turn on light
         } else if (photocellReading < 500) {
             Serial.println(" - Light");
-            digitalWrite (LIGHT_LED_PIN, LOW);    // turn off light
+            pinState = LOW;    // turn off light
         } else if (photocellReading < 800) {
             Serial.println(" - Luminous");
-            digitalWrite (LIGHT_LED_PIN, LOW);    // turn off light
+            pinState = LOW;    // turn off light
         } else {
             Serial.println(" - Bright");
-            digitalWrite (LIGHT_LED_PIN, LOW);    // turn off light
+            pinState = LOW;    // turn off light
         }
+        #ifdef LIGHT_LED_PIN
+        digitalWrite(LIGHT_LED_PIN, pinState);
+        #endif
         logValue(TOPIC_LIGHT, photocellReading);
     }
     #endif
