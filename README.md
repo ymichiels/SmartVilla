@@ -183,26 +183,29 @@ Vous pouvez utiliser les scripts suivants avec la commande **`npm run`** :
 - `npm run selfsigned - [nom-de-domaine-ici]` créer des certificats auto-signés pour un nom de domaine fourni. Utilisé  pour exécuter https-Server. Génère les fichiers server.key et server.crt.
 
 
-### Diagrammes
+# Application
 
-- scénario :
+## Diagramme de cas d'utilisation du système
 
-- Diagramme de cas d'utilisation du système
+![alt text](SmartVilla-Assets/doc/diagrams/diagramme_cas_utilisation.png "Diagramme de cas d'utilisation du système")
 
-![alt text](SmartVilla-Assets/doc/diagrams/diagramme_cas_utilisation.png "Logo Title Text 1")
+## Diagramme de séquence : protocoleMQTT
 
-- Diagramme de séquence : protocoleMQTT
+![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_MQTT.png "Diagramme de séquence : protocoleMQTT")
 
-![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_MQTT.png "Logo Title Text 1")
+## Diagramme de séquence : Acquisition des données
 
-- Diagramme de séquence : Acquisition des données
+![alt text](SmartVilla-Assets/doc/diagrams/diagramme_acquisition_des_donnee.png "Diagramme de séquence : Acquisition des données")
 
-![alt text](SmartVilla-Assets/doc/diagrams/diagramme_acquisition_des_donnee.png "Logo Title Text 1")
+## Diagramme de séquence : Consultation des données
 
-- Diagramme de séquence : Consultation des données
+![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_consusltation_donnee.png "Diagramme de séquence : Consultation des données")
 
-![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_consusltation_donnee.png "Logo Title Text 1")
-
-- Diagramme de séquence : Stockage des données
+## Diagramme de séquence : Stockage des données
  
- ![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_donne.png "Logo Title Text 1")
+ ![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_donne.png "Diagramme de séquence : Stockage des données")
+
+
+# Fin
+
+Auteurs Yan Michiels & Cebollado Johann.
