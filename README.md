@@ -19,8 +19,7 @@ Table des matières
 Dans le cadre de notre formation de master première année parcours technologie de l'internet (TI) à l'UPPA, nous sommes amenés à réaliser un projet tutoré a vocation académique. Ce projet a pour but de nourrir des réflexions, développer une analyse et contribuer à une solution impliquant une réalisation logicielle.
 Notre équipe à réaliser le projet en partenariat avec l'entreprise Capgemini de Pau, représenté par COUMATES Matthieu et encadré par Rémi DOUTEAUD, Nicolas DUBOIS et Fabien LAMAS. Notre étude porte sur l'Internet des objets, et plus particulièrement le déploiement d'objets connectés par les collectivités françaises pour la mise en place des nouvelles "villes intelligentes", dans une logique de développement durable. Nous avons initié cette démarche avec la bâtisse d'une solution de surveillance de données pour une agence se voulant être une prémisse à l'élaboration dans le futur d'une solution à l'échelle d'une ville.
 
-Nous avons réalisé une documentation pour expliquer tous le processeur de développement et permettre à n'importe quel utilisateur de pouvoir refaire chez lui le projet. Notre logiciel que nous vous proposons est libre et open-source avec les codes sources sous licence [GPL ](https://www.gnu.org/licenses/licenses.fr.html)
-
+Nous avons réalisé une documentation pour expliquer tous le processeur de développement et permettre à n'importe quel utilisateur de pouvoir refaire chez lui le projet. 
 
 # Structure du projet
 
@@ -107,7 +106,7 @@ arduino
 	└── esp32
 ```
 
-Puis, dans l'onglet `Preference` vous pouvez spécifier l'emplacement du carnet de croquis avec le chemin **`D:\Documents\Arduino\sketch`**. Désormais vous aurait dans **`carnet de croquis `** les sketchs des ESP.
+Puis dans l'onglet `Preference`, vous pouvez spécifier l'emplacement du carnet de croquis avec le chemin **`D:\Documents\Arduino\sketch`**. Désormais, vous aurez dans **`carnet de croquis `** les sketchs des ESP.
 
 ## PlatformIO IDE `Recommandé`
 
@@ -128,7 +127,7 @@ mkdir myproject && cd myproject
 git clone https://github.com/ymichiels/SmartVilla.git
 ```
 
-Puis ouvrer le projet sur Visual Studio Code.
+Puis, ouvrer le projet sur Visual Studio Code.
 
 ### Installation  avec VCS
 
@@ -143,7 +142,7 @@ Après avoir installé PlatformIO IDE, vous allez devoir récupérer le projet,
 
 Brancher votre microcontrôleur, configurer le dans le fichier de configuration platform.ini en suivant les recommandation de la documentation officielle à cette **[page](https://docs.platformio.org/en/latest/projectconf/index.html)**, 
 
-Reliez vos capteurs au(x) microcontrôleur(x) puis réaliser les actions suivantes :
+Relier vos capteurs au(x) microcontrôleur(s) puis réaliser les actions suivantes :
 
 1. Build le programme
 2. Upload and Monitor
@@ -223,4 +222,10 @@ Auteurs Yan Michiels & Cebollado Johann.
 
 # Licence
 
+Notre logiciel que nous vous proposons est libre et open-source avec les codes sources sous licence [GPL](https://www.gnu.org/licenses/licenses.fr.html)
 
+TODO 
+
+- [ ] Mettre la documentation sous licence [Creative Commons CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/fr/).
+
+Note : La badgeuse c'est la vie
