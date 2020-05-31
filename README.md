@@ -47,7 +47,7 @@ SmartVilla-Assets - Directory with contains all extern files
 SmartVilla-PlatformIO - Directory for project platform.io
 ├── include - directory witch contains contains header files
 ├── lib - directory witch contains the libs files
-├── src - directory witch contains the ESP32 and ESP8266 file
+├── src - directory witch contains the main.cpp file
 └── test - directory witch contains PIO Unit Testing
 SmartVilla-Node-Red - Directory the projet WebApp with Node-Red Server 
 ```
