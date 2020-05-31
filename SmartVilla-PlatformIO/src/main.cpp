@@ -195,8 +195,6 @@ void setup() { // to run once
     Serial.begin(115200);         // Initialize the serial port
 
     #ifdef DHT_SENSOR
-        Serial.println("DHT22 Humidity - Temperature Sensor");
-        Serial.println("RH (%)\t\t Temp (°C)");
         dht.begin();
     #endif
     #ifdef DISTANCE_SENSOR
@@ -232,19 +230,18 @@ void loop() {
         float h = dht.readHumidity();
         float t = dht.readTemperature();
         // Check if any reads failed and exit early (to try again).
-        if (isnan(h) || isnan(t) && DHT_TYPE == DHT22) {
-            Serial.println("Failed to read from DHT22 sensor!");
-            return;
+        if (isnan(h) || isnan(t)) {
+            if(DHT_TYPE == DHT22)
+                Serial.println("Failed to read from DHT22 sensor!");
+            else if(DHT_TYPE == DHT11)
+                Serial.println("Failed to read from DHT11 sensor!");
+        } else {
+            Serial.print(h);
+            logValue(TOPIC_HUM, h);
+            Serial.print(" \t\t");
+            Serial.println(t);
+            logValue(TOPIC_TEMP, t);
         }
-        else if (isnan(h) || isnan(t) && DHT_TYPE == DHT11) {
-            Serial.println("Failed to read from DHT11 sensor!");
-            return;
-        }
-        Serial.print(h);
-        logValue(TOPIC_HUM, h);
-        Serial.print(" \t\t");
-        Serial.println(t);
-        logValue(TOPIC_TEMP, t);
     }
     #endif
 
