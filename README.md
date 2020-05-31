@@ -199,7 +199,7 @@ Vous pouvez utiliser les scripts suivants avec la commande **`npm run`** :
 
 ## Diagramme de séquence : Consultation des données
 
-![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_consusltation_donnee.png "Diagramme de séquence : Consultation des données")
+![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_consultation_donnee.png "Diagramme de séquence : Consultation des données")
 
 ## Diagramme de séquence : Stockage des données
  
