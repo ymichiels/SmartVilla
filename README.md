@@ -199,11 +199,11 @@ et si tout se passe bien une instance de Node-Red va se lancer.
 
 Vous pouvez utiliser les scripts suivants avec la commande **`npm run`** :
 
-- `npm run start` - démarre l'instance du serveur Node-Red en exécutant `node server.js`.
+- `npm run start` : démarre l'instance du serveur Node-Red en exécutant `node server.js`.
 
-- `npm run adminauth - [votre-mot-de-passe-ici]` - créer un hachage pour un mot de passe fourni.  Hachage réalisé, vous pouvez copié et collé le mot de passe haché généré dans le fichier `settings.js` pour vos comptes d'utilisateur.
+- `npm run adminauth - [votre-mot-de-passe-ici]` : créer un hachage pour un mot de passe fourni.  Hachage réalisé, vous pouvez copié et collé le mot de passe haché généré dans le fichier `settings.js` pour vos comptes d'utilisateur.
 
-- `npm run selfsigned - [nom-de-domaine-ici]` créer des certificats auto-signés pour un nom de domaine fourni. Utilisé  pour exécuter https-Server. Génère les fichiers server.key et server.crt.
+- `npm run selfsigned - [nom-de-domaine-ici]` : créer des certificats auto-signés pour un nom de domaine fourni. Utilisé  pour exécuter https-Server. Génère les fichiers server.key et server.crt.
 
 
 # Application
