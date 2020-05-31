@@ -1,0 +1,31 @@
+{
+	"folders": [
+		// All project
+		{
+			"name": "SmartVilla",
+			"path": "."
+		},
+		// Docs and release notes
+		{
+			"name": "Documentation",
+			"path": "SmartVilla-Assets"
+		},
+		// PlatformIO project
+		{
+			"name": "PlatformIO",
+			"path": "SmartVilla-PlatformIO"
+		},
+		// Node-Red project
+		{
+			"name": "Node-Red",
+			"path": "SmartVilla-Node-Red"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true,
+		"files.associations": {
+			"locale": "cpp",
+			"string": "cpp"
+		}
+	}
+}

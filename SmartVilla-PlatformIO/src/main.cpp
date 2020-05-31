@@ -22,24 +22,55 @@
  *              print light boolean
  ********************/
 
-#include <DHT.h>
-#include <PubSubClient.h>
-#include <WiFi.h>
-#include <WifiLocation.h>
-#include "config_wifi.h"        // Wifi configuration
+//#include <stdio.h>
+//#include "config_wifi.h"        // Wifi configuration
 
 //Constants
-#define TOPIC_PREFIX "smart-villa/etage1/esp32/"
 
-//#define DHT_SENSOR
+//Topic
+#define TOPIC_PREFIX "smart-villa/etage1/"
+
+//#define WIFI_USED
+//#define GEOLOCATION_USED
+//#define SEND_INVALID 1
+
+//Sensor
+#define DHT_SENSOR
 //#define DISTANCE_SENSOR
 //#define LIGHT_SENSOR
 #define MOTION_SENSOR
 
+#ifdef WIFI_USED
+    #ifdef ARDUINO_ARCH_ESP8266
+        #include <ESP8266WiFi.h>
+    #endif
+
+    #ifdef ARDUINO_ARCH_ESP32
+        #include <WiFi.h>
+    #endif
+
+    #include <PubSubClient.h>
+    WiFiClient espClient;
+    PubSubClient client{MQTT_IP, MQTT_PORT, espClient};
+
+    #ifdef GEOLOCATION_USED
+        #include <WifiLocation.h>
+        WifiLocation location(API_KEY);
+        #define TOPIC_LATITUDE "lat"
+        #define TOPIC_LONGITUDE "lon"
+    #endif
+#endif
+
 #ifdef DHT_SENSOR
+    #include <DHT.h>
     #define TOPIC_HUM "hum"
     #define TOPIC_TEMP "temp"
-    #define DHT_PIN 0           // what pin on the arduino is the DHT22 data line connected to
+    #ifdef ARDUINO_ARCH_ESP8266
+        #define DHT_PIN D4
+    #endif
+    #ifdef ARDUINO_ARCH_ESP32
+        #define DHT_PIN 0       // what pin on the arduino is the DHT22 data line connected to
+    #endif
     //#define DHT_TYPE DHT22    // DHT 22  (AM2302)
     #define DHT_TYPE DHT11      // DHT 11
     DHT dht(DHT_PIN, DHT_TYPE); // Initialize DHT sensor for normal 16mhz Arduino
@@ -47,102 +78,126 @@
 
 #ifdef DISTANCE_SENSOR
     #define TOPIC_DIST "dist"
-    #define ECHO_PIN 2
-    #define TRIG_PIN 4
-    float v = 331.5+0.6*20;       // m/s
+    #ifdef ARDUINO_ARCH_ESP8266
+        #define ECHO_PIN D6
+        #define TRIG_PIN D5
+    #endif
+    #ifdef ARDUINO_ARCH_ESP32
+        #define ECHO_PIN 2
+        #define TRIG_PIN 4
+    #endif
+    float v = 331.5+0.6*20;     // m/s
 #endif
 
 #ifdef LIGHT_SENSOR
     #define TOPIC_LIGHT "lum"
-    #define LIGHT_SENSOR_PIN 32
-    #define LIGHT_LED_PIN 26
+    #ifdef ARDUINO_ARCH_ESP8266
+        #define LIGHT_SENSOR_PIN A0
+    #endif
+    #ifdef ARDUINO_ARCH_ESP32
+        #define LIGHT_SENSOR_PIN 32
+        #define LIGHT_LED_PIN 26
+    #endif
     int photocellReading;       // the analog reading from the analog resistor divider
 #endif
 
 #ifdef MOTION_SENSOR
     #define TOPIC_MOTION "mouv"
-    #define PIR_PIN 5           // choose the input pin (for PIR sensor)
+    #ifdef ARDUINO_ARCH_ESP8266
+        #define PIR_PIN D2      // choose the input pin (for PIR sensor)
+    #endif
+    #ifdef ARDUINO_ARCH_ESP32
+        #define PIR_PIN 5       // choose the input pin (for PIR sensor)
+    #endif
     int pirState = LOW;         // we start, assuming no motion detected
     int detect;                 // variable for reading the pin status
 #endif
 
-#define TOPIC_LATITUDE "lat"
-#define TOPIC_LONGITUDE "lon"
-
-WiFiClient espClient;
-PubSubClient client{MQTT_IP, MQTT_PORT, espClient};
 long lastMsg = 0;
 char msg[50];
 int value = 0;
-WifiLocation location(API_KEY);
 
+#ifdef WIFI_USED
 void logValue(const char category[], float value) {
     String raw{value};
-    String topic{TOPIC_PREFIX};
+    String topic{TOPIC_PREFIX TOPIC_MCU} ;
     topic += category;
     client.publish(topic.c_str(), raw.c_str());
 }
+#endif
 
-void setup_wifi() {
-    delay(10);
-    // We start by connecting to a WPA/WPA2 network
-    Serial.println();
-    Serial.print("Connecting to ");
-    Serial.println(WIFI_SSID);
-
-    WiFi.mode(WIFI_MODE_STA);
-
-    WiFi.begin(WIFI_SSID, WIFI_PWD);
-
-    while (WiFi.status() != WL_CONNECTED) {
-        Serial.print("Attempting to connect to WPA SSID: ");
+#ifdef WIFI_USED
+    void setup_wifi() {
+        delay(10);
+        // We start by connecting to a WPA/WPA2 network
+        Serial.println();
+        Serial.print("Connecting to ");
         Serial.println(WIFI_SSID);
-        // wait 5 seconds for connection:
-        Serial.print("Status = ");
-        Serial.println(WiFi.status());
-        delay(500);
-    }
-    location_t loc = location.getGeoFromWiFi();
 
-    Serial.println("");
-    Serial.println("WiFi connected");
-    Serial.println("IP address: " + String(WiFi.localIP()));
-    Serial.println("Location request data");
-    Serial.println(location.getSurroundingWiFiJson());
-    Serial.println("Latitude: " + String(loc.lat, 7));
-    logValue(TOPIC_LATITUDE, loc.lat);
-    Serial.println("Longitude: " + String(loc.lon, 7));
-    logValue(TOPIC_LONGITUDE, loc.lon);
-    Serial.println("Accuracy: " + String(loc.accuracy));
-}
+        // Set WiFi to station mode and disconnect from an AP if it was previously connected
+        #ifdef ARDUINO_ARCH_ESP8266
+            WiFi.mode(WIFI_STA);
+        #endif
 
-void callback(char* topic, byte* payload, unsigned int length) {
-    Serial.print("Message arrived [");
-    Serial.print(topic);
-    Serial.print("] ");
-    for (int i = 0; i < length; i++) {
-        Serial.print((char)payload[i]);
-    }
-    Serial.println();
-}
+        #ifdef ARDUINO_ARCH_ESP32
+            WiFi.mode(WIFI_STA);
+        #endif
 
-//Reconnect
-void reconnect() {
-    // Loop until we're reconnected
-    while (!client.connected()) {
-        Serial.print("Attempting MQTT connection...");
-            if (client.connect("ESP32Client")) {
-            Serial.println("connected");
-        }
-        else {
-            Serial.print("failed, rc=");
-            Serial.print(client.state());
-            Serial.println(" try again in 5 seconds");
-            // Wait 5 seconds before retrying
+        WiFi.begin(WIFI_SSID, WIFI_PWD);
+
+        while (WiFi.status() != WL_CONNECTED) {
+            Serial.print("Attempting to connect to WPA SSID: ");
+            Serial.println(WIFI_SSID);
+            // wait 5 seconds for connection:
+            Serial.print("Status = ");
+            Serial.println(WiFi.status());
             delay(500);
         }
+        Serial.println("");
+        Serial.println("WiFi connected");
+        Serial.print("IP address: ");
+        Serial.println(WiFi.localIP());
+
+        #ifdef GEOLOCATION_USED
+            location_t loc = location.getGeoFromWiFi();
+            Serial.println("Location request data");
+            Serial.println(location.getSurroundingWiFiJson());
+            Serial.println("Latitude: " + String(loc.lat, 7));
+            logValue(TOPIC_LATITUDE, loc.lat);
+            Serial.println("Longitude: " + String(loc.lon, 7));
+            logValue(TOPIC_LONGITUDE, loc.lon);
+            Serial.println("Accuracy: " + String(loc.accuracy));
+        #endif
     }
-}
+
+    void callback(char* topic, byte* payload, unsigned int length) {
+        Serial.print("Message arrived [");
+        Serial.print(topic);
+        Serial.print("] ");
+        for (int i = 0; i < length; i++) {
+            Serial.print((char)payload[i]);
+        }
+        Serial.println();
+    }
+
+    //Reconnect
+    void reconnect() {
+        // Loop until we're reconnected
+        while (!client.connected()) {
+            Serial.print("Attempting MQTT connection...");
+                if (client.connect(ESP_TYPE "Client")) {
+                Serial.println("connected");
+            }
+            else {
+                Serial.print("failed with state, rc=");
+                Serial.print(client.state());
+                Serial.println(" try again in 5 seconds");
+                // Wait before retrying
+                delay(100);
+            }
+        }
+    }
+#endif    
 
 void setup() { // to run once
     Serial.begin(115200);         // Initialize the serial port
@@ -161,7 +216,7 @@ void setup() { // to run once
         pinMode(LIGHT_LED_PIN, OUTPUT);     // declare led pin as OUTPUT
     #endif
     #ifdef MOTION_SENSOR
-        pinMode(PIR_PIN, INPUT);     // declare sensor as INPUT
+        pinMode(PIR_PIN, INPUT);  // declare sensor as INPUT
         // Set motionSensor pin as interrupt, assign interrupt function and set RISING mode
     #endif
 
@@ -185,11 +240,11 @@ void loop() {
         float h = dht.readHumidity();
         float t = dht.readTemperature();
         // Check if any reads failed and exit early (to try again).
-        if (isnan(h) || isnan(t) && DHT_TYPE==DHT22) {
+        if (isnan(h) || isnan(t) && DHT_TYPE == DHT22) {
             Serial.println("Failed to read from DHT22 sensor!");
             return;
         }
-        else if (isnan(h) || isnan(t) && DHT_TYPE==DHT11) {
+        else if (isnan(h) || isnan(t) && DHT_TYPE == DHT11) {
             Serial.println("Failed to read from DHT11 sensor!");
             return;
         }
@@ -269,5 +324,5 @@ void loop() {
 
     // Wait a few seconds between measurements. The DHT22 should not be read at a higher frequency of
     // about once every 2 seconds. So we add a 3 second delay to cover this.
-    delay(3000);
+    delay(4000);
 }

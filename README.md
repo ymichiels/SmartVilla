@@ -1,66 +1,168 @@
 # SmartVilla
 
-# Tutoriel Arduino
+[TOC]
 
-Guide d'utilisation des capteurs arduino
+# Introduction
 
-## Pour commencer
+Dans le cadre de notre formation de master première année parcours technologie de l'internet (TI) à l'UPPA, nous sommes amenés à réaliser un projet tutoré a vocation académique. Ce projet a pour but de nourrir des réflexions, développer une analyse et contribuer à une solution impliquant une réalisation logicielle.
+Notre équipe à réaliser le projet en partenariat avec l'entreprise Capgemini de Pau, représenté par COUMATES Matthieu et encadré par Rémi DOUTEAUD, Nicolas DUBOIS et Fabien LAMAS. Notre étude porte sur l'Internet des objets, et plus particulièrement le déploiement d'objets connectés par les collectivités françaises pour la mise en place des nouvelles "villes intelligentes", dans une logique de développement durable. Nous avons initié cette démarche avec la batisse d'une solution de surveillance de données pour une agence se voulant être une prémisse à l'élaboration dans le futur d'une solution à l'échelle d'une ville.
 
-Une rapide définition de l’ IOT :Dispositif pour lequel les objets conçus par l’homme sont relié à internet. Ces objets se voient attribuer des identifiants uniques leur permettant de transmettre des données sur le ré-seau internet sans nécessiter aucune action humain à humain ou humain à machine. 
+Nous avons réalisé une documentation pour expliquer tous le processur de développement et permettre à n'importe quel utilisateur de pouvoir refaire chez lui le projet. Notre logiciel que nous vous proposons est libre et open-source avec les codes sources sous licence [GPL ](https://www.gnu.org/licenses/licenses.fr.html)
 
-De manière générale, l’IoT est important dans la création d’une infra-structure intelligente pour administrer, servir et accompagner la population urbaine en constante augmentation. Une ville intelligente (SMART CITY) a besoin d’une efficacité dans différents domaines tels que :
-  — les transports et la mobilité,
-  — la communication,
-  — les services,
-  — la sécurité,
-  — la communication,
-  — la relation citoyenne
+Voici la documentation du projet intitulé **SmartVilla**.
 
-Les applications IoT dans la ville permettent notamment d’optimiser :
-  — La performance des bâtiments,
-  — les consommations d’énergie,
-  — la gestion du mobilier urbain,
-  — l’élimination des déchets.
-  — Les consommations d’énergie,
-  — la mobilité
+# Structure du projet
 
-Les bénéficiaires engendrés de ces dispositifs sont nombreux :
+```
+SmartVilla-PlatformIO - Directory for project platform.io
+├── include - directory witch contains contains header files
+├── lib - directory witch contains the libs files
+├── src - directory witch contains the ESP32 and ESP8266 file
+└── test - directory witch contains PIO Unit Testing
+SmartVilla-Node-Red - Directory the projet WebApp with Node-Red Server 
+SmartVilla-Assets - Directory with contains all extern files
+├── sketch - Directory wich contains the arduino sketch files
+|	├── esp8266 - Directory wich contains the esp8266.io file
+|	└── esp32 - Directory wich contains the arduino esp32.io file
+└── doc - Directory witch contains docs content
+	└── diagrams - Directory witch contains diagrams content
+	└── images - Directory witch contains images content
 
-  — les consommateurs,
-  — les citoyens,
-  — les institutions territoriales
-  — les entreprises privées.
+```
+
+# Pour commencer
+
+## Prérequis du projet
+
+- Connexion Internet
+
+Nous avons réalisé une documentation en fonctions de divers usages possibles pour le développement du projet. 
+
+- Soit vous utilisez ArduinoIDE
+- Soit vous utilisez PlatformIO IDE
+
+Ses deux usages différents ont leurs propres sections.
+
+## Arduino IDE
+
+### Prérequis
+
+1. Installation d'Arduino IDE
+
+Télécharger et installer sur votre machine la dernière version stable de l'IDE Arduino depuis **[le site officiel arduino](https://www.arduino.cc/en/Main/Software)**
+
+3. Installation de l'outil Git
+
+Télécharger et installer sur votre machine la dernière version stable de l'outil Git depuis 
+
+4. Installation de l'interpréteur Python
+
+Télécharger et installer sur votre machine la dernière version stable de Python depuis **[le site officiel python](https://www.python.org/downloads/)**
+
+### Récupérer le projet avec Git
+
+Pour récupérer le projet, ouvrer un terminal, accéder au répertoire où vous souhaitez mettre le projet et clonez-le à l'aide de la commande `git clone`
+
+```
+cd /your_repository
+git clone https://github.com/ymichiels/SmartVilla.git
+```
+
+### Configuration de l'ESP8266
+
+Rendez-vous sur la page du doc officiel de l'ESP8266 pour Arduino : **[doc d'installation de l'ESP8266 pour arduino](https://arduino-esp8266.readthedocs.io/en/2.7.1/installing.html#boards-manager)** et veuillez suivre les étapes de configurations
+
+### Configuration de l'ESP32
+
+Rendez-vous sur la page du Git officiel de l'ESP32 : **[git officiel de l'ESP32](https://github.com/espressif/arduino-esp32)**, veuillez suivre les étapes de configurations. 
+
+Une fois que l'installation d'arduino IDE a été réalisée et que vos ESP8266/ESP32 sont bien configurés, 
+
+1. rendez-vous sur le dossier Arduino installé par défaut au chemin **`C:/Users/[YOUR_USER_NAME]/Documents/Arduino`**. 
+2. déplacer le dossier sketch du projet que vous avez récupéré précédemment avec Git vers ce dossier
+
+Si étape bien réalisée vous devez vous retrouver avec un dossier contenant 
+
+```
+arduino
+├── hardware
+|	└──espressif
+|	   ├── esp8266
+|	   └── esp32
+├── librairies
+└── sketch
+	├── esp8266
+	└── esp32
+```
+
+Puis, dans l'onglet `Preference` vous pouvez spécifier l'emplacement du carnet de croquis avec le chemin **`D:\Documents\Arduino\sketch`**. Désormais vous aurait dans **`carnet de croquis `** les sketchs des ESP.
+
+## PlatformIO IDE
+
+### Prérequis
+
+4. Installation de l'IDE gratuit Visual Studio Code
+
+Télécharger et installer sur votre machine la dernière version stable de l'IDE VSC depuis **[le site officiel visualstudio](https://code.visualstudio.com/?wt.mc_id=DX_841432)**
+
+### Installation
+
+Après avoir installé VCS (Visual Studio Code). On va pouvoir installer le plugin PlatformIO sur VCS. Pour ce faire, veuillez vous rendre sur la doc officielle d'installation à cette **[page](https://docs.platformio.org/en/latest/integration/ide/vscode.html#installation)**.
+
+### Récupérer le projet avec Git
+
+Après avoir installé PlatformIO IDE, vous allez devoir récupérer le projet, 
+
+1. rendez-vous sur le github, copier l'URL du GitHub dans la boite de dialogue **`Clone or download`**.
+2. rendez-vous sur Visual Studio, coller le lien dans la palette de commande **Git: Clone** (Ctrl+Maj+P).
+
+Brancher votre microcontrôleur, configurer le dans le fichier de configuration platform.ini en suivant les recommandation de la documentation officielle à cette **[page](https://docs.platformio.org/en/latest/projectconf/index.html)**, 
+
+Reliez vos capteurs au microcontrôleur (commenter dé-commenter dans le programme les capteurs utilisés non-utilisés) puis réaliser les actions suivantes :
+
+1. Build le programme
+2. Upload and Monitor
+
+Et voilà votre capteur affiche les données.
+
+## Node-Red
+
+### Prérequis
+
+1. Installation de la plateforme Node.JS
+
+Télécharger et installer sur votre machine la dernière version stable de Node.Js depuis **[le site officiel nodejs](https://nodejs.org/en/)**
+
+### Utilisation
+
+- Soit avec le terminal de votre machine
+- Soit avec VCS qui prend en charge Node.JS 
+
+Dans les deux cas, vous allez devoir vous rendre dans le dossier **`SmartVilla-Node-Red`** du projet. 
+
+Puis exécuter npm start et si tout se passe bien une instance de Node-Red va se lancer.
 
 
-Deux démarches distinctes et pourquoi pas complémentaires
-  — L’approche par l’IoT qui sous-entend d’optimiser la gestion de la ville par l’administration.
-  — L’approche par les applications, une approche qui se veut participative.
-
-Elle consiste à associer le citoyen à la gestion de la cité. Grâce à l’IOT on peut en connectant les objets, les rendre créateurs de valeur. 
-
-Ces objets pouvant s’intégrer dans des plateformes de relever per-mettent d’éviter tout un renouvellement complet d’un parc matériel. Ici,pour la gestion de déchets ont peut ajouter des capteurs aux poubelles sans remplacer les poubelles existantes. Ceci permet donc de réaliser des éco-nomies importantes. On peut dire qu’il y a autant d’objets que d’usages possibles dans l’Internet des objets.
-
-
-### Prérequies
+### Diagrammes
 
 - scénario :
 
 - Diagramme de cas d'utilisation du système
 
-![alt text](Diagramme/diagramme_cas_utilisation.png "Logo Title Text 1")
+![alt text](SmartVilla-Assets/doc/diagrams/diagramme_cas_utilisation.png "Logo Title Text 1")
 
 - Diagramme de séquence : protocoleMQTT
 
-![alt text](Diagramme/diagramme_sequence_MQTT.png "Logo Title Text 1")
+![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_MQTT.png "Logo Title Text 1")
 
 - Diagramme de séquence : Acquisition des données
 
-![alt text](Diagramme/diagramme_acquisition_des_donnee.png "Logo Title Text 1")
+![alt text](SmartVilla-Assets/doc/diagrams/diagramme_acquisition_des_donnee.png "Logo Title Text 1")
 
 - Diagramme de séquence : Consultation des données
 
-![alt text](Diagramme/diagramme_sequence_consusltation_donnee.png "Logo Title Text 1")
+![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_consusltation_donnee.png "Logo Title Text 1")
 
 - Diagramme de séquence : Stockage des données
  
- ![alt text](Diagramme/diagramme_sequence_donne.png "Logo Title Text 1")
+ ![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_donne.png "Logo Title Text 1")

@@ -1,13 +1,14 @@
 {
-  "name": "node-red",
+  "name": "SmartVilla-Node-Red",
   "version": "0.1.1",
   "description": "UI editor node-red for SmartVilla app",
   "main": "node_modules/node-red/red.js",
-  "readme": "README.md",
+  "readme": "../README.md",
   "scripts": {
     "start": "node node_modules/node-red/red.js",
-    "admin": "node-red-admin",
-    "adminauth": "node -e \"console.log(require('bcryptjs').hashSync(process.argv[1], 8));\""
+    "admin": "node_modules/.bin/node-red-admin",
+    "adminauth": "node -e \"console.log(require('bcryptjs').hashSync(process.argv[1], 8));\"",
+    "selfsigned": "node -e \"var pems = require('selfsigned').generate([{ name: 'commonName', value: process.argv[1] }], { days: 365 }); var fs = require('fs'); fs.writeFileSync('server.key', pems.private); fs.writeFileSync('server.crt', pems.cert); console.log('Updated server.key|crt for CN', process.argv[1]);\""
   },
   "author": "Michiels Yan & Cebollado Johann",
   "repository": {
@@ -21,16 +22,20 @@
     "SmartVilla"
   ],
   "license": "GPL-3.0-only",
+  "optionalDependencies": {
+    "selfsigned": "1.8.*",
+    "bcryptjs": "^2.4.0"
+  },
   "dependencies": {
-    "mongodb": "^3.5.7",
-    "node": "^14.2.0",
+    "mongodb": "^3.5.8",
+    "node": "^14.3.0",
     "node-red": "^1.0.6",
     "node-red-admin": "^0.1.8",
     "node-red-contrib-auth": "^0.1.7",
     "node-red-contrib-ui-contextmenu": "^1.0.13",
     "node-red-contrib-ui-svg": "^1.2.3",
     "node-red-contrib-ui_list": "^0.1.5",
-    "node-red-contrib-web-worldmap": "^2.3.11",
+    "node-red-contrib-web-worldmap": "^2.3.13",
     "node-red-dashboard": "^2.22.1",
     "node-red-node-mongodb": "0.0.14"
   }

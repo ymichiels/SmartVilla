@@ -13,12 +13,12 @@
 #define CONFIG_WIFI_HEADER
 
 // nom du réseaux wifi
-#define WIFI_SSID ""
+#define WIFI_SSID "iPhone"
 // mot de passe du wifi
-#define WIFI_PWD ""
+#define WIFI_PWD "testmqtt"
 
 // ip du brocker MQTT
-#define MQTT_IP IPAddress(0, 0, 0, 0)
+#define MQTT_IP IPAddress(20, 188, 44, 39)
 // port du brocker MQTT
 #define MQTT_PORT 1880
 
@@ -28,6 +28,6 @@
 #define MQTT_PWD ""
 
 // clé API google pour géocalisation
-#define API_KEY "AIzaSyA1xl75rhbHZKvADw28rSl8MuNc6snGOBU"
+#define API_KEY "AIzaSyA0E-jxZROG2GbdiQHzmCUS9cU-x-Sh0KA"
 
 #endif // CONFIG_WIFI_HEADER
