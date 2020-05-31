@@ -27,10 +27,10 @@
 //Constants
 
 //Sensor
-#define DHT_SENSOR
-//#define DISTANCE_SENSOR
+//#define DHT_SENSOR
+#define DISTANCE_SENSOR
 //#define LIGHT_SENSOR
-#define MOTION_SENSOR
+//#define MOTION_SENSOR
 
 #ifdef WIFI_USED
     #ifdef ARDUINO_ARCH_ESP8266
@@ -102,12 +102,8 @@
         #define PIR_PIN 5       // choose the input pin (for PIR sensor)
     #endif
     int pirState = LOW;         // we start, assuming no motion detected
-    int detect;                 // variable for reading the pin status
+    int detect = 0;             // variable for reading the pin status
 #endif
-
-long lastMsg = 0;
-char msg[50];
-int value = 0;
 
 #ifdef WIFI_USED
 void logValue(const char category[], float value) {
