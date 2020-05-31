@@ -7,7 +7,7 @@
 		},
 		// Docs and release notes
 		{
-			"name": "Documentation",
+			"name": "Assets",
 			"path": "SmartVilla-Assets"
 		},
 		// PlatformIO project
