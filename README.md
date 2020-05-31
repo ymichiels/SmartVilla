@@ -6,8 +6,8 @@ Table des matières
 ---------------------------------------------------------------------
 
 1. [Introduction](#Introduction)
-2. [Structure du projet](#Structure)
-3. [Pour commencer](#Pour commencer)
+2. [Structure du projet](#Structure-du-projet)
+3. [Pour commencer](#Pour-commencer)
 4. [Application](#Application)
 7. [Auteurs](#auteurs)
 8. [License](#license)
