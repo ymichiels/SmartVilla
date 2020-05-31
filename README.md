@@ -63,7 +63,9 @@ Télécharger et installer sur votre machine la dernière version stable de Pyth
 Pour récupérer le projet, ouvrer un terminal, accéder au répertoire où vous souhaitez mettre le projet et clonez-le à l'aide de la commande `git clone`
 
 ```
-cd /your_repository
+# Create a project folder and change into it
+mkdir myproject && cd myproject
+# Clone this repository into the project folder
 git clone https://github.com/ymichiels/SmartVilla.git
 ```
 
