@@ -28,7 +28,7 @@
 
 //Sensor
 //#define DHT_SENSOR
-#define DISTANCE_SENSOR
+//#define DISTANCE_SENSOR
 //#define LIGHT_SENSOR
 //#define MOTION_SENSOR
 
@@ -53,66 +53,45 @@
     #endif
 #endif
 
-#ifdef DHT_SENSOR
+#ifdef DHT_PIN
     #include <DHT.h>
     #define TOPIC_HUM "hum"
     #define TOPIC_TEMP "temp"
-    #ifdef ARDUINO_ARCH_ESP8266
-        #define DHT_PIN D4
-    #endif
-    #ifdef ARDUINO_ARCH_ESP32
-        #define DHT_PIN 0       // what pin on the arduino is the DHT22 data line connected to
-    #endif
     //#define DHT_TYPE DHT22    // DHT 22  (AM2302)
     #define DHT_TYPE DHT11      // DHT 11
     DHT dht(DHT_PIN, DHT_TYPE); // Initialize DHT sensor for normal 16mhz Arduino
 #endif
 
-#ifdef DISTANCE_SENSOR
+#if defined (ECHO_PIN) && defined (TRIG_PIN)
+    #define DIST_SENSOR_USED
     #define TOPIC_DIST "dist"
-    #ifdef ARDUINO_ARCH_ESP8266
-        #define ECHO_PIN D6
-        #define TRIG_PIN D5
-    #endif
-    #ifdef ARDUINO_ARCH_ESP32
-        #define ECHO_PIN 2
-        #define TRIG_PIN 4
-    #endif
     float v = 331.5+0.6*20;     // m/s
+#elif defined (ECHO_PIN) || defined (TRIG_PIN)
+    #error "ECHO_PIN and TRIG_PIN should be defined together. Only one specify"
 #endif
 
-#ifdef LIGHT_SENSOR
+#ifdef LIGHT_SENSOR_PIN
     #define TOPIC_LIGHT "lum"
-    #ifdef ARDUINO_ARCH_ESP8266
-        #define LIGHT_SENSOR_PIN A0
-    #endif
     #ifdef ARDUINO_ARCH_ESP32
-        #define LIGHT_SENSOR_PIN 32
         #define LIGHT_LED_PIN 26
     #endif
     int photocellReading;       // the analog reading from the analog resistor divider
 #endif
 
-#ifdef MOTION_SENSOR
+#ifdef MOTION_PIN
     #define TOPIC_MOTION "mouv"
-    #ifdef ARDUINO_ARCH_ESP8266
-        #define PIR_PIN D2      // choose the input pin (for PIR sensor)
-    #endif
-    #ifdef ARDUINO_ARCH_ESP32
-        #define PIR_PIN 5       // choose the input pin (for PIR sensor)
-    #endif
     int pirState = LOW;         // we start, assuming no motion detected
     int detect = 0;             // variable for reading the pin status
 #endif
 
-#ifdef WIFI_USED
 void logValue(const char category[], float value) {
+#ifdef WIFI_USED
     String raw{value};
     String topic{TOPIC_PREFIX TOPIC_MCU} ;
     topic += category;
     client.publish(topic.c_str(), raw.c_str());
-}
 #endif
+}
 
 #ifdef WIFI_USED
     void setup_wifi() {
@@ -190,36 +169,39 @@ void logValue(const char category[], float value) {
 void setup() { // to run once
     Serial.begin(115200);         // Initialize the serial port
 
-    #ifdef DHT_SENSOR
+    #ifdef DHT_PIN
         dht.begin();
     #endif
-    #ifdef DISTANCE_SENSOR
+    #ifdef DIST_SENSOR_USED
         pinMode(TRIG_PIN, OUTPUT);
         digitalWrite(TRIG_PIN, LOW);
         pinMode(ECHO_PIN, INPUT);
     #endif
-    #ifdef LIGHT_SENSOR
+    #ifdef LIGHT_PIN
         pinMode(LIGHT_LED_PIN, OUTPUT);     // declare led pin as OUTPUT
     #endif
-    #ifdef MOTION_SENSOR
-        pinMode(PIR_PIN, INPUT);  // declare sensor as INPUT
+    #ifdef MOTION_PIN
+        pinMode(MOTION_PIN, INPUT);  // declare sensor as INPUT
         // Set motionSensor pin as interrupt, assign interrupt function and set RISING mode
     #endif
 
+#ifdef WIFI_USED
     setup_wifi();
     client.setServer(MQTT_IP, MQTT_PORT);
     client.setCallback(callback);
+#endif
 }
 
 void loop() {
-
+#ifdef WIFI_USED
     if (!client.connected()) {
         reconnect();
     }
     client.loop();
+#endif
 
     //Publish The Sensor Data
-    #ifdef DHT_SENSOR
+    #ifdef DHT_PIN
     {
         // Reading temperature or humidity takes about 250 milliseconds!
         // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
@@ -241,7 +223,7 @@ void loop() {
     }
     #endif
 
-    #ifdef DISTANCE_SENSOR
+    #ifdef DIST_SENSOR_USED
     {
         // send sound pulse
         digitalWrite(TRIG_PIN, HIGH); // pulse started
@@ -257,7 +239,7 @@ void loop() {
     }
     #endif
 
-    #ifdef LIGHT_SENSOR
+    #ifdef LIGHT_PIN
     {
         photocellReading = analogRead(LIGHT_SENSOR_PIN); // read the current light levels
         Serial.print("Analog reading = ");
@@ -283,9 +265,9 @@ void loop() {
     }
     #endif
 
-    #ifdef MOTION_SENSOR
+    #ifdef MOTION_PIN
     {
-        detect = digitalRead(PIR_PIN);     // read input value
+        detect = digitalRead(MOTION_PIN);     // read input value
         if (detect == HIGH) {              // check if the input is HIGH
             if (pirState == LOW) {
                 // we have just turned on
