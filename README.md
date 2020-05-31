@@ -1,6 +1,18 @@
 # SmartVilla
 
-[TOC]
+- - -
+
+Table des matières
+---------------------------------------------------------------------
+
+1. [Introduction](#Introduction)
+2. [Structure du projet](#Structure)
+3. [Pour commencer](#Pour commencer)
+4. [Application](#Application)
+7. [Auteurs](#auteurs)
+8. [License](#license)
+
+- - -
 
 # Introduction
 
@@ -9,7 +21,6 @@ Notre équipe à réaliser le projet en partenariat avec l'entreprise Capgemini 
 
 Nous avons réalisé une documentation pour expliquer tous le processeur de développement et permettre à n'importe quel utilisateur de pouvoir refaire chez lui le projet. Notre logiciel que nous vous proposons est libre et open-source avec les codes sources sous licence [GPL ](https://www.gnu.org/licenses/licenses.fr.html)
 
-Voici la documentation du projet intitulé **SmartVilla**.
 
 # Structure du projet
 
@@ -206,6 +217,10 @@ Vous pouvez utiliser les scripts suivants avec la commande **`npm run`** :
  ![alt text](SmartVilla-Assets/doc/diagrams/diagramme_sequence_donne.png "Diagramme de séquence : Stockage des données")
 
 
-# Fin
+# Auteurs
 
 Auteurs Yan Michiels & Cebollado Johann.
+
+# Licence
+
+
