@@ -1,5 +1,5 @@
-.pio/
-.vscode/
-.idea/
+.pio
+.vscode
+.idea
 /node_modules/
 
