@@ -39,11 +39,11 @@ Nous avons réalisé une documentation pour expliquer tous le processeur de dév
 ```
 SmartVilla-Assets - Directory with contains all extern files
 ├── sketch - Directory wich contains the arduino sketch files
-|	├── esp8266 - Directory wich contains the esp8266.io file
-|	└── esp32 - Directory wich contains the arduino esp32.io file
+|   ├── esp8266 - Directory wich contains the esp8266.io file
+|   └── esp32 - Directory wich contains the arduino esp32.io file
 └── doc - Directory witch contains docs content
-	└── diagrams - Directory witch contains diagrams content
-	└── images - Directory witch contains images content
+    └── diagrams - Directory witch contains diagrams content
+    └── images - Directory witch contains images content
 SmartVilla-PlatformIO - Directory for project platform.io
 ├── include - directory witch contains contains header files
 ├── lib - directory witch contains the libs files
@@ -110,13 +110,13 @@ Si étape bien réalisée vous devez vous retrouver avec un dossier contenant
 ```
 arduino
 ├── hardware
-|	└──espressif
-|	   ├── esp8266
-|	   └── esp32
+|   └──espressif
+|   ├── esp8266
+|   └── esp32
 ├── librairies
 └── sketch
-	├── esp8266
-	└── esp32
+    ├── esp8266
+    └── esp32
 ```
 
 Puis dans l'onglet `Preference`, vous pouvez spécifier l'emplacement du carnet de croquis avec le chemin **`D:\Documents\Arduino\sketch`**. Désormais, vous aurez dans **`carnet de croquis `** les sketchs des ESP.
