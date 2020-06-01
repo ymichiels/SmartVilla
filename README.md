@@ -21,8 +21,8 @@ Table des matières
 2. [Structure du projet](#Structure-du-projet)
 3. [Pour commencer](#Pour-commencer)
 4. [Application](#Application)
-7. [Auteurs](#auteurs)
-8. [License](#license)
+7. [Auteurs](#Auteurs)
+8. [License](#License)
 - - -
 
 # Introduction
