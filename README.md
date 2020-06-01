@@ -14,7 +14,6 @@
 # SmartVilla
 
 - - -
-
 Table des matières
 ---------------------------------------------------------------------
 
@@ -24,7 +23,6 @@ Table des matières
 4. [Application](#Application)
 7. [Auteurs](#auteurs)
 8. [License](#license)
-
 - - -
 
 # Introduction
