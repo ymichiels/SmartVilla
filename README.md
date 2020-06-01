@@ -191,7 +191,12 @@ npm install
 npm start
 ```
 
-et si tout se passe bien une instance de Node-Red va se lancer.
+et si tout se passe bien une instance de Node-Red va se lancer à l'addresse `http://localhost:1880/`.
+
+Vous pouvez faire vos propres modifications en local, et pour visualiser celles-ci :
+
+1. Faire un deploy pour affecter vos modifications aux server Node-Red.
+2. Puis dans le pannel à droite dans l'onglet `dashboard` cliquer sur le petit icône à droite des onglets `Layout`, `Site` et `Theme`. Ou rendez vous à l'addresse `http://localhost:1880/ui/`
 
 ### Autres scripts
 
