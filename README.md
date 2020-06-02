@@ -108,7 +108,7 @@ Si étape bien réalisée vous devez vous retrouver avec un dossier contenant
 ```
 arduino
 ├── hardware
-|   └──espressif
+|   ├──espressif
 |   ├── esp8266
 |   └── esp32
 ├── librairies
