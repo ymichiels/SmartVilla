@@ -40,7 +40,7 @@ SmartVilla-Assets - Directory with contains all extern files
 |   ├── esp8266 - Directory wich contains the esp8266.io file
 |   └── esp32 - Directory wich contains the arduino esp32.io file
 └── doc - Directory witch contains docs content
-    └── diagrams - Directory witch contains diagrams content
+    ├── diagrams - Directory witch contains diagrams content
     └── images - Directory witch contains images content
 SmartVilla-PlatformIO - Directory for project platform.io
 ├── include - directory witch contains contains header files
