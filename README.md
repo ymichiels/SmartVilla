@@ -22,7 +22,7 @@ Table des matières
 3. [Pour commencer](#Pour-commencer)
 4. [Application](#Application)
 7. [Auteurs](#Auteurs)
-8. [License](#License)
+8. [Licence](#Licence)
 - - -
 
 # Introduction
@@ -187,8 +187,8 @@ npm install
 ### Exécution
 
 ```
-# Start the server (runs 'node server.js' in node-red directory)
-npm start
+# Start the server (runs 'node server.js' in node-red directory with settings in SmartVilla-Node-Red directory)
+npm start -s
 ```
 
 et si tout se passe bien une instance de Node-Red va se lancer à l'addresse `http://localhost:1880/`.
@@ -202,7 +202,7 @@ Vous pouvez faire vos propres modifications en local, et pour visualiser celles-
 
 Vous pouvez utiliser les scripts suivants avec la commande **`npm run`** :
 
-- `npm run start` : démarre l'instance du serveur Node-Red en exécutant `node server.js`.
+- `npm run start -s` : démarre l'instance du serveur Node-Red en exécutant `node server.js`.
 
 - `npm run adminauth - [votre-mot-de-passe-ici]` : créer un hachage pour un mot de passe fourni.  Hachage réalisé, vous pouvez copié et collé le mot de passe haché généré dans le fichier `settings.js` pour vos comptes d'utilisateur.
 
