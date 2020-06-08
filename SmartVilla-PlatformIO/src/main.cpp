@@ -32,6 +32,8 @@
 //#define LIGHT_SENSOR
 //#define MOTION_SENSOR
 
+#include"Arduino.h"
+
 #ifdef WIFI_USED
     #ifdef ARDUINO_ARCH_ESP8266
         #include <ESP8266WiFi.h>
