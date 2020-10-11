@@ -28,7 +28,7 @@ Table des matières
 # Introduction
 
 Dans le cadre de notre formation de master première année parcours technologie de l'internet (TI) à l'UPPA, nous sommes amenés à réaliser un projet tutoré a vocation académique. Ce projet a pour but de nourrir des réflexions, développer une analyse et contribuer à une solution impliquant une réalisation logicielle.
-Notre équipe à réaliser le projet en partenariat avec l'entreprise Capgemini de Pau, représenté par COUMATES Matthieu et encadré par Rémi DOUTEAUD, Nicolas DUBOIS et Fabien LAMAS. Notre étude porte sur l'Internet des objets, et plus particulièrement le déploiement d'objets connectés par les collectivités françaises pour la mise en place des nouvelles "villes intelligentes", dans une logique de développement durable. Nous avons initié cette démarche avec la bâtisse d'une solution de surveillance de données pour une agence se voulant être une prémisse à l'élaboration dans le futur d'une solution à l'échelle d'une ville.
+Notre équipe a réalié le projet en partenariat avec l'entreprise Capgemini de Pau, représenté par COUMATES Matthieu et encadré par Rémi DOUTEAUD, Nicolas DUBOIS et Fabien LAMAS. Notre étude porte sur l'Internet des objets, et plus particulièrement le déploiement d'objets connectés par les collectivités françaises pour la mise en place des nouvelles "villes intelligentes", dans une logique de développement durable. Nous avons initié cette démarche avec la bâtisse d'une solution de surveillance de données pour une agence se voulant être une prémisse à l'élaboration dans le futur d'une solution à l'échelle d'une ville.
 
 Nous avons réalisé une documentation pour expliquer tous le processeur de développement et permettre à n'importe quel utilisateur de pouvoir refaire chez lui le projet. 
 
