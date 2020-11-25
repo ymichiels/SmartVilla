@@ -1,0 +1,61 @@
+################################################################################
+# Node-RED Stack or Compose
+################################################################################
+# docker stack deploy node-red --compose-file docker-compose-node-red.yml
+# docker-compose -f docker-compose-node-red.yml -p myNoderedProject up
+################################################################################
+
+# file edited based on the guide from "https://nodered.org/docs/getting-started/docker"
+# as the repository "https://github.com/node-red/node-red-docker".
+# Modification includes: adding more services, declaring dependencies between
+#  container, build image to get custom flow and settings and packages.
+version: "3.7"
+
+# the list of container to start
+services:
+  node-red:
+    build: .
+    environment:
+      - TZ=Europe/Amsterdam
+    depends_on:
+      - mqtt-brocker
+      - mongo
+    restart: unless-stopped
+    networks:
+      - node-red-net
+    ports:
+      - "1880:1880"
+    volumes:
+      - node-red-data:/data
+
+  mqtt-brocker:
+    image: eclipse-mosquitto
+    restart: unless-stopped
+    networks:
+      - node-red-net
+    ports:
+      - "1883:1883"
+
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    networks:
+      - node-red-net
+    # - ports: # only used localy, no need to leak it
+    #   - "27017:27017"
+    volumes: 
+      - mongo-data:/data/db
+
+
+# Declare a couple volume that will outlive the VMs
+volumes:
+  node-red-data: # bind the current folder as node-red-data
+    driver_opts:
+      type: none
+      device: $PWD
+      o: bind
+  mongo-data:
+
+# Declare the shared networks the container will used to interract
+networks:
+  node-red-net:
