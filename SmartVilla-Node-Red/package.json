@@ -10,7 +10,11 @@
     "adminauth": "node -e \"console.log(require('bcryptjs').hashSync(process.argv[1], 8));\"",
     "selfsigned": "node -e \"var pems = require('selfsigned').generate([{ name: 'commonName', value: process.argv[1] }], { days: 365 }); var fs = require('fs'); fs.writeFileSync('server.key', pems.private); fs.writeFileSync('server.crt', pems.cert); console.log('Updated server.key|crt for CN', process.argv[1]);\""
   },
-  "author": "Michiels Yan & Cebollado Johann",
+  "contributors": [
+    {"name": "Yan Michiels"},
+    {"name": "Johann Cebollado"}
+  ],
+  "author": "Michiels Yan",
   "repository": {
     "type": "git",
     "url": "git://github.com/ymichiels/SmartVilla.git"
