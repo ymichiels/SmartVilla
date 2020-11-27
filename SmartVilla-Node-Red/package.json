@@ -11,8 +11,12 @@
     "selfsigned": "node -e \"var pems = require('selfsigned').generate([{ name: 'commonName', value: process.argv[1] }], { days: 365 }); var fs = require('fs'); fs.writeFileSync('server.key', pems.private); fs.writeFileSync('server.crt', pems.cert); console.log('Updated server.key|crt for CN', process.argv[1]);\""
   },
   "contributors": [
-    {"name": "Yan Michiels"},
-    {"name": "Johann Cebollado"}
+    {
+      "name": "Yan Michiels"
+    },
+    {
+      "name": "Johann Cebollado"
+    }
   ],
   "author": "Michiels Yan",
   "repository": {
@@ -23,7 +27,9 @@
     "node-red",
     "nodes",
     "flow",
-    "SmartVilla"
+    "SmartVilla",
+    "IoT",
+    "Smart Cities"
   ],
   "license": "GPL-3.0-only",
   "optionalDependencies": {},
