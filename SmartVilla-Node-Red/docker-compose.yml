@@ -43,7 +43,7 @@ services:
       - node-red-net
     # - ports: # only used localy, no need to leak it
     #   - "27017:27017"
-    volumes: 
+    volumes:
       - mongo-data:/data/db
 
 

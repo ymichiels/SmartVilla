@@ -17,7 +17,7 @@
 // The `https` setting requires the `fs` module. Uncomment the following
 // to make it available:
 var fs = require("fs");
-var path = require ("path");
+var path = require("path");
 
 module.exports = {
     // the tcp port that the Node-RED web server is listening on
