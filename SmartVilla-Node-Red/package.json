@@ -37,7 +37,7 @@
     "node-red": "^1.2.5",
     "node-red-contrib-ui-svg": "^2.0.3",
     "node-red-contrib-web-worldmap": "^2.6.0",
-    "node-red-dashboard": "^2.24.0",
+    "node-red-dashboard": "^2.26.2",
     "node-red-node-mongodb": "^0.2.4",
     "node-red-node-ui-list": "^0.3.4"
   }
